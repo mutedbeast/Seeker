@@ -1,30 +1,35 @@
 import requests
 import sys
-from default_wordlist import wordlist_fun
+from wordlist import wordlist
+from without_argv import without_arg
 
+a = 'wordlist_all.txt'
+c = 'wordlist_common.txt'
+custom = 'wordlist_test.txt'
 help = False
-def usage_guide():
-    print("Usage : Python seeker.py <domain> <operation> <wordlist>")
+total_directories = 0
 
-def without_arg():
-    print('''
-░██╗░░░░░░░██╗███████╗██╗░░░░░░█████╗░░█████╗░███╗░░░███╗███████╗
-░██║░░██╗░░██║██╔════╝██║░░░░░██╔══██╗██╔══██╗████╗░████║██╔════╝
-░╚██╗████╗██╔╝█████╗░░██║░░░░░██║░░╚═╝██║░░██║██╔████╔██║█████╗░░
-░░████╔═████║░██╔══╝░░██║░░░░░██║░░██╗██║░░██║██║╚██╔╝██║██╔══╝░░
-░░╚██╔╝░╚██╔╝░███████╗███████╗╚█████╔╝╚█████╔╝██║░╚═╝░██║███████╗
-░░░╚═╝░░░╚═╝░░╚══════╝╚══════╝░╚════╝░░╚════╝░╚═╝░░░░░╚═╝╚══════╝
-''')
-    print("Choose one operation \n 1.Indexing \n 2.Port Scanning")
+def usage_guide():
+    print("Usage : Python seeker.py <domain> <operation> <wordlist> \n Use all for full search, com for common search" )
+
 
 if len(sys.argv) == 1:
     without_arg()
 else:
     domain = sys.argv[1]
+    operation = sys.argv[2]
 
-if sys.argv[1] == 'help':
+if sys.argv[1] == '-help' or sys.argv[1] == '-h'or sys.argv[1] == 'help':
     help = True
     usage_guide()
+
+if operation == '-a':
+    wordlist = wordlist(a)
+elif operation == '-c':
+    wordlist = wordlist(c)
+elif operation == '-custom':
+    wordlist = wordlist(custom)
+
 
 indexs = []
 if help == False:
@@ -32,9 +37,11 @@ if help == False:
         x = requests.get(f"{domain}/{words}") 
         if x.status_code == 200:
             indexs.append(f"{domain}/{words}")
+            total_directories = total_directories + 1 
+            print(f"{domain}/{words}")
+            indexs.clear()
         
-print(f"Total {len(indexs)} found")
-for index in indexs:
-    print(index)
+print(f"Total {total_directories} found")
+
 
 
