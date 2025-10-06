@@ -30,16 +30,12 @@ elif operation == '-c':
 elif operation == '-custom':
     wordlist = wordlist(custom)
 
-
-indexs = []
 if help == False:
     for words in wordlist:
         x = requests.get(f"{domain}/{words}") 
         if x.status_code == 200:
-            indexs.append(f"{domain}/{words}")
             total_directories = total_directories + 1 
             print(f"{domain}/{words}")
-            indexs.clear()
         
 print(f"Total {total_directories} found")
 
