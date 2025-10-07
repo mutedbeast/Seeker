@@ -1,11 +1,12 @@
 #import stuff here
-import requests
-import sys
 import argparse
+import time
+
 
 from wordlist import wordlist
 from without_argv import without_arg
 from text import description,usage
+from directory_scanner import directory_scanner
 
 #Variables
 a = 'wordlist_all.txt'
@@ -31,13 +32,6 @@ First work on argument based then no argument based
 if len(sys.argv) == 1:
     without_arg()
 else:
-
-if operation == '-a':
-    wordlist = wordlist(a)
-elif operation == '-c':
-    wordlist = wordlist(c)
-elif operation == '-custom':
-    wordlist = wordlist(wordlist_file_directory)
 '''
 
 if args.operation == 'd' or args.operation == 'D':
@@ -47,6 +41,7 @@ if args.operation == 'd' or args.operation == 'D':
         wordlist = wordlist(c)
     else:
         wordlist = wordlist(args.command)
+    directory_scanner(args.target,wordlist_file=wordlist)
     
 if args.operation == 'p' or args.operation == 'P':
     pass
