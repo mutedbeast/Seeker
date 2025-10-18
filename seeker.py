@@ -7,6 +7,7 @@ from wordlist import wordlist
 from without_argv import without_arg
 from text import description,usage
 from directory_scanner import directory_scanner
+from port_scanner import port_scan_main
 
 #Variables
 a = 'wordlist_all.txt'
@@ -26,13 +27,12 @@ parser.add_argument("-c",'--command',required=True, help='add command here')
 
 args = parser.parse_args()
 
-'''
-First work on argument based then no argument based
 
-if len(sys.argv) == 1:
+#First work on argument based then no argument based
+
+if not any(vars(args).values()):
     without_arg()
-else:
-'''
+
 
 if args.operation == 'd' or args.operation == 'D':
     if args.command == 'full' or args.command == 'f':
@@ -44,7 +44,10 @@ if args.operation == 'd' or args.operation == 'D':
     directory_scanner(args.target,wordlist_file=wordlist)
     
 if args.operation == 'p' or args.operation == 'P':
-    pass
+    print('port scanning started')
+    if args.command == 'v':
+        port_scan_main(target=f"{args.target}",verbose=True)
+    
 
 
 #print(f"\nTotal {total_directories} found")
