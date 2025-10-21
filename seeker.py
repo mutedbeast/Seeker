@@ -3,7 +3,7 @@ import argparse
 import time
 
 
-from wordlist import wordlist
+from wordlist import wordlist_function
 from without_argv import without_arg
 from text import description,usage
 from directory_scanner import directory_scanner
@@ -36,12 +36,12 @@ if not any(vars(args).values()):
 
 if args.operation == 'd' or args.operation == 'D':
     if args.command == 'full' or args.command == 'f':
-        wordlist = wordlist(a)
+        wordlist_function = wordlist_function(a)
     elif args.command == 'common' or args.command == 'c':
-        wordlist = wordlist(c)
+        wordlist_function = wordlist_function(c)
     else:
-        wordlist = wordlist(args.command)
-    directory_scanner(args.target,wordlist_file=wordlist)
+        wordlist_function = wordlist_function(args.command)
+    directory_scanner(args.target,wordlist_file=wordlist_function)
     
 if args.operation == 'p' or args.operation == 'P':
     print('port scanning started')
