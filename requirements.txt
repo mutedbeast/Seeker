@@ -1,0 +1,26 @@
+# Seeker - Requirements
+# Python 3.8+ required
+
+# HTTP Requests and Web Scanning
+requests>=2.31.0
+
+# URL Parsing and Validation
+urllib3>=2.0.0
+
+# Concurrent Operations
+# Note: concurrent.futures is part of standard library (Python 3.2+)
+
+# Command-line Argument Parsing
+# Note: argparse is part of standard library (Python 2.7+, 3.2+)
+
+# Socket Programming for Port Scanning
+# Note: socket is part of standard library
+
+# SSL/TLS Support
+certifi>=2023.7.22
+
+# Character Encoding Detection (for response parsing)
+chardet>=5.2.0
+
+# HTTP Adapters and Retry Logic
+requests-toolbelt>=1.0.0
