@@ -7,6 +7,7 @@ from without_argv import without_arg
 from text import description,usage
 from directory_scanner import directory_scanner
 from port_scanner import port_scan_main
+from urllib.parse import urlparse
 
 #Variables
 a = 'wordlist_all.txt'
@@ -31,17 +32,24 @@ args = parser.parse_args()
 if not any(vars(args).values()):
     without_arg()
 
+target = args.target
+
+
 if args.operation == 'd' or args.operation == 'D':
+    if not args.target.startswith(('http://', 'https://')):
+        target = 'https://' + target
     if args.command == 'full' or args.command == 'f':
         wordlist_function = wordlist_function(a)
     elif args.command == 'common' or args.command == 'c':
         wordlist_function = wordlist_function(c)
     else:
         wordlist_function = wordlist_function(args.command)
-    directory_scanner(args.target,wordlist_file=wordlist_function)
+    directory_scanner(target,wordlist_file=wordlist_function)
     
 if args.operation == 'p' or args.operation == 'P':
     timeout_input = args.command
+    if target.startswith(('http://', 'https://')):
+        target = urlparse(target).netloc
     print(f'\nPort scanning started at {current_time()}')
     if args.verbose :
         port_scan_main(target=f"{args.target}",verbose=True,timeout=timeout_input)
