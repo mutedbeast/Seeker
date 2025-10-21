@@ -41,11 +41,12 @@ if args.operation == 'd' or args.operation == 'D':
     directory_scanner(args.target,wordlist_file=wordlist_function)
     
 if args.operation == 'p' or args.operation == 'P':
+    timeout_input = args.command
     print(f'\nPort scanning started at {current_time()}')
     if args.verbose :
-        port_scan_main(target=f"{args.target}",verbose=True)
+        port_scan_main(target=f"{args.target}",verbose=True,timeout=timeout_input)
     else:
-        port_scan_main(target=f"{args.target}",verbose=False)
+        port_scan_main(target=f"{args.target}",verbose=False,timeout=timeout_input)
 
 
 

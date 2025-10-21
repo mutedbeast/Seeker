@@ -9,10 +9,7 @@ rest_ports = sorted(all_ports - set(important_ports))
 
 
 def scan_port(target: str, port: int, timeout: float = 1.0, tls_ports: set | None = None) -> Dict[str, Any]:
-    """
-    Try to connect to target:port. If port is in tls_ports, attempt TLS handshake.
-    Returns a dict describing the result.
-    """
+    
     if tls_ports is None:
         tls_ports = {443, 8443}
 
@@ -45,10 +42,7 @@ def scan_port(target: str, port: int, timeout: float = 1.0, tls_ports: set | Non
 
 
 def port_scan_main(target: str, verbose = False,timeout: float = 1.0, scan_rest_if_none: bool = True) -> List[Dict[str, Any]]:
-    """
-    Scan important_ports first. If scan_rest_if_none is True and NO important ports were open,
-    scan the rest_ports. Returns a list of scan result dicts.
-    """
+    
     tls_ports = {443, 8443}
     results: List[Dict[str, Any]] = []
 
@@ -67,7 +61,6 @@ def port_scan_main(target: str, verbose = False,timeout: float = 1.0, scan_rest_
         if verbose:
             print(f"[-] {target}:{port} closed or unreachable. {r['error']}")
 
-    # Decide whether to scan the rest
     open_important = [r for r in results if r["open"]]
     if scan_rest_if_none and not open_important:
         print(f"No important ports were open — scanning remaining {len(rest_ports)} ports (this may take a while)...")
@@ -81,6 +74,4 @@ def port_scan_main(target: str, verbose = False,timeout: float = 1.0, scan_rest_
     return results
 
 
-if __name__ == "__main__":
-    # Example run
-    port_scan_main("192.168.7.88", timeout=1.0)
+

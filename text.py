@@ -1,11 +1,40 @@
 description = '''Seeker is a lightweight command-line utility for directory indexing and TCP port scanning. It safely lists files, builds searchable indexes, and performs responsible port probes with concurrency controls. Designed for developers and sysadmins, Seeker emphasizes usability, error-handling, and explicit permission checks to avoid misuse during network scanning operations and compliance.
 '''
 
-usage = ''' For Directory Scanning : seeker.py -t [target] -o [operation] -c [command]
-            For Port Scanning : seeker.py -t [target] [operation] 
+usage = '''
+SEEKER - Red Team Reconnaissance Tool
 
+Usage:
+  python seeker.py -t TARGET -o OPERATION [-c WORDLIST] [-v]
+  python seeker.py (interactive mode)
+
+Arguments:
+  -t, --target      Target URL (https://example.com) or IP address (192.168.1.1)
+  -o, --operation   Operation type: 'd' (directory scan) or 'p' (port scan)
+  -c, --command     Wordlist selection: 'c' (common), 'a' (all), or custom path
+  -v, --verbose     Enable verbose output (optional)
+
+Examples:
+  Directory Scanning (common wordlist):
+    python seeker.py -t https://example.com -o d -c c
+
+  Directory Scanning (custom wordlist):
+    python seeker.py -t https://example.com -o d -c /path/to/wordlist.txt
+
+  Directory Scanning (verbose):
+    python seeker.py -t https://example.com -o d -c a -v
+
+  Port Scanning:
+    python seeker.py -t 192.168.1.100 -o p
+
+  Interactive Mode:
+    python seeker.py
+
+Notes:
+  - Always ensure you have authorization before scanning any target
+  - Use full URLs with protocol (https://) for directory scanning
+  - Use IP addresses or hostnames for port scanning
 '''
-
 ports_info = [
     {"port": 20,   "service": "ftp-data", "proto": "tcp", "desc": "FTP data transfer"},
     {"port": 21,   "service": "ftp",      "proto": "tcp", "desc": "FTP control/command"},
