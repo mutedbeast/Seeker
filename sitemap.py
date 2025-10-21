@@ -1,6 +1,8 @@
+#Sitemap will be implemented in future updates
+
 import requests
 import xml.etree.ElementTree as xml
-#from seeker import domain
+
 
 def get_sitemap(domain):
     sitemap = requests.get(f"{domain}/sitemap.xml")

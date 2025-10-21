@@ -1,7 +1,7 @@
 #import stuff here
 import argparse
-import time
 
+from time_handler import current_time
 from wordlist import wordlist_function
 from without_argv import without_arg
 from text import description,usage
@@ -20,7 +20,7 @@ parser = argparse.ArgumentParser(prog=None, usage=usage, description=description
 parser.add_argument("-t", "--target", help="Path to directory to index")
 parser.add_argument("-o",'--operation',metavar='', help='Choose an operation')
 parser.add_argument("-c",'--command', metavar='',help='Choose a command')
-parser.add_argument("-v",'--verbose', metavar='', action='store_true',help='Verbose')
+parser.add_argument("-v",'--verbose', action='store_true',help='Verbose')
 
 
 args = parser.parse_args()
@@ -41,10 +41,11 @@ if args.operation == 'd' or args.operation == 'D':
     directory_scanner(args.target,wordlist_file=wordlist_function)
     
 if args.operation == 'p' or args.operation == 'P':
-    print('port scanning started')
+    print(f'\nPort scanning started at {current_time()}')
     if args.verbose :
         port_scan_main(target=f"{args.target}",verbose=True)
-    
+    else:
+        port_scan_main(target=f"{args.target}",verbose=False)
 
 
 
