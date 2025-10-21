@@ -45,5 +45,3 @@ def normalize_user_path(p: str) -> str:
     p = os.path.normpath(p)
     return p
 
-
-without_arg()

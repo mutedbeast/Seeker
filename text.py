@@ -2,7 +2,7 @@ description = '''Seeker is a lightweight command-line utility for directory inde
 '''
 
 usage = ''' For Directory Scanning : seeker.py -t [target] -o [operation] -c [command]
-            For Port Scanning : seeker.py [target] [operation] 
+            For Port Scanning : seeker.py -t [target] [operation] 
 
 '''
 
