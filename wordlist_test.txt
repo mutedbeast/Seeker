@@ -1,3 +1,6 @@
+about
+impact
+login
 admin
 projects
 help
